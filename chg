@@ -1,0 +1,37 @@
+/////////////////////////
+owu_struct_t o2;
+
+DS18B20 sensor(USART2);
+ 
+uint16_t Analog_buffer[3];
+ BUTTON(GPIOC,13,Gpio::Function::INPUT,Gpio::Type::PUSH_PULL,Gpio::Pull::NO,Gpio::Speed::MEDIUM); // Wakeup and RTC time stamp
+
+ 
+float temp=0,temp2=0,threshold=24;
+uint64_t  address;
+
+ 
+
+ 
+
+ 
+
+
+uint8_t dev_addr[3][8];
+uint8_t dev_count=0;
+int main()
+{
+
+//  while (address==0){
+//    address=sensor.DS18B20_get_Address_one(USART2); Time::delayMs(1);}
+
+
+
+  while(sensor.osearch(&o2, dev_addr[dev_count],USART2)) {
+      dev_count++;
+    if (dev_count >= 3) {
+      break;
+    }
+  }
+
+  LED.set(true);
